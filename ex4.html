@@ -34,7 +34,7 @@
          listItem.appendChild(node);
 
          let deleteButton = document.createElement("button");
-         deleteButton.setAttribute("onclick", `deleteItem('${input}')`)
+         deleteButton.setAttribute("onclick", "deleteItem(this)")
          deleteButton.innerText = "Delete";
          listItem.appendChild(deleteButton);
 
@@ -50,20 +50,13 @@
       for (let item of listItems) {
          const itemName = item.innerHTML;
          let deleteButton = document.createElement("button");
-         deleteButton.setAttribute("onclick", `deleteItem('${itemName}')`)
+         deleteButton.setAttribute("onclick", "deleteItem(this)")
          deleteButton.innerText = "Delete";
          item.appendChild(deleteButton);
       }
 
-      function deleteItem(itemName) {
-         const listElem = document.getElementsByTagName("ul")[0];
-         const listItems = listElem.getElementsByTagName("li");
-
-         for (let item of listItems) {
-            if (item.innerText.includes(itemName)) {
-               item.remove();
-            }
-         }
+      function deleteItem(obj) {
+         obj.parentElement.remove();
       }
    </script>
 
