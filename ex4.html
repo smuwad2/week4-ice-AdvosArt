@@ -11,20 +11,60 @@
 
    <input type="text" id="inputText">
    <!-- add a button here for adding new item -->
+   <button onclick="addItem()">Enter</button>
 
    <ul>
-      <li>Notebook<!--<button>Delete</button></li>-->
+      <li>Notebook</li>
       <li>Jello</li>
       <li>Spinach</li>
       <li>Rice</li>
       <li>Birthday Cake</li>
-      <li>Candles</li>
+      <li>Candle</li>
    </ul>
 
    <script>
 
       // add code here
+      // Ex3
+      function addItem() {
+         let input = document.getElementById("inputText").value;
 
+         let listItem = document.createElement("li");
+         let node = document.createTextNode(input);
+         listItem.appendChild(node);
+
+         let deleteButton = document.createElement("button");
+         deleteButton.setAttribute("onclick", `deleteItem('${input}')`)
+         deleteButton.innerText = "Delete";
+         listItem.appendChild(deleteButton);
+
+         const listElem = document.getElementsByTagName("ul")[0];
+         listElem.appendChild(listItem);
+
+      }
+
+      // Ex4
+      const listElem = document.getElementsByTagName("ul")[0];
+      const listItems = listElem.getElementsByTagName("li");
+      
+      for (let item of listItems) {
+         const itemName = item.innerHTML;
+         let deleteButton = document.createElement("button");
+         deleteButton.setAttribute("onclick", `deleteItem('${itemName}')`)
+         deleteButton.innerText = "Delete";
+         item.appendChild(deleteButton);
+      }
+
+      function deleteItem(itemName) {
+         const listElem = document.getElementsByTagName("ul")[0];
+         const listItems = listElem.getElementsByTagName("li");
+
+         for (let item of listItems) {
+            if (item.innerText.includes(itemName)) {
+               item.remove();
+            }
+         }
+      }
    </script>
 
 </body>
